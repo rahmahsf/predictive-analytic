@@ -29,21 +29,30 @@ Menjelaskan tujuan dari pernyataan masalah:
   - Menangani ketidakseimbangan data kelas dengan menerapkan teknik resampling seperti SMOTE, undersampling, atau penyesuaian class weight agar model lebih sensitif terhadap prediksi kelas minoritas.
 
 ## Data Understanding
-Paragraf awal bagian ini menjelaskan informasi mengenai data yang Anda gunakan dalam proyek. Sertakan juga sumber atau tautan untuk mengunduh dataset. Contoh: [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Restaurant+%26+consumer+data).
+[Dataset Stroke Prediction didapatkan dari Kaggle](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset), dataset ini digunakan untuk memprediksi apakah seorang pasien berisiko mengalami stroke berdasarkan beberapa parameter input seperti jenis kelamin, usia, riwayat penyakit (seperti hipertensi dan penyakit jantung), serta status merokok. Setiap baris dalam dataset ini memberikan informasi relevan mengenai masing-masing pasien, yang dapat membantu dalam membangun model prediktif untuk deteksi dini dan pencegahan stroke.
+Informasi Metadata:
+- Pemilik/Author: fedesoriano
+- Kategori: Kesehatan, Klasifikasi Biner
+- Lisensi: © Pemilik Asli (Original Authors)
+- Frekuensi Pembaruan: Tidak pernah (Never)
+- Tags: Health, Health Conditions, Healthcare, Public Health, Binary Classification
+ 
 
-Selanjutnya uraikanlah seluruh variabel atau fitur pada data. Sebagai contoh:  
-
-### Variabel-variabel pada Restaurant UCI dataset adalah sebagai berikut:
-| Nama Variabel | Deskripsi                                                                 |
-|---------------|---------------------------------------------------------------------------|
-| accepts       | Jenis pembayaran yang diterima pada restoran tertentu                     |
-| cuisine       | Jenis masakan yang disajikan pada restoran                                |
-| name          | Nama restoran                                                             |
-| city          | Kota tempat restoran berada                                               |
-| price         | Kisaran harga makanan di restoran tersebut                                |
-| rating        | Penilaian pelanggan terhadap restoran                                     |
-| delivery      | Menunjukkan apakah restoran menyediakan layanan pengantaran (ya/tidak)   |
-| parking       | Menunjukkan ketersediaan tempat parkir di restoran                        |
+### Variabel-variabel pada Stroke Prediction dataset adalah sebagai berikut:
+| No | Nama Atribut       | Tipe Data       | Deskripsi                                                                 |
+|----|--------------------|-----------------|---------------------------------------------------------------------------|
+| 1  | id                 | Integer         | ID unik pasien                                                            |
+| 2  | gender             | Kategori        | Jenis kelamin pasien: "Male", "Female", atau "Other"                     |
+| 3  | age                | Numerik (Float) | Usia pasien                                                               |
+| 4  | hypertension       | Biner (0/1)     | 0 jika pasien tidak menderita hipertensi, 1 jika ya                      |
+| 5  | heart_disease      | Biner (0/1)     | 0 jika pasien tidak memiliki penyakit jantung, 1 jika ya                 |
+| 6  | ever_married       | Kategori        | Status pernikahan: "Yes" atau "No"                                       |
+| 7  | work_type          | Kategori        | Jenis pekerjaan: "children", "Govt_job", "Never_worked", "Private", "Self-employed" |
+| 8  | Residence_type     | Kategori        | Jenis tempat tinggal: "Urban" atau "Rural"                               |
+| 9  | avg_glucose_level  | Numerik (Float) | Rata-rata kadar glukosa dalam darah                                      |
+|10  | bmi                | Numerik (Float) | Indeks massa tubuh                                                       |
+|11  | smoking_status     | Kategori        | Status merokok: "formerly smoked", "never smoked", "smokes", atau "Unknown" |
+|12  | stroke             | Biner (0/1)     | 1 jika pasien pernah terkena stroke, 0 jika tidak                         |
 
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
@@ -80,6 +89,7 @@ Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, probl
 
 _Catatan:_
 - _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-[1] [World Health Organization. (2021). Stroke: Key facts]. (https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death)
-[2] [Utama, Y. A., & Nainggolan, S. S. (2022). Faktor resiko yang mempengaruhi kejadian stroke: sebuah tinjauan sistematis. Jurnal Ilmiah Universitas Batanghari Jambi, 22(1), 549-553.] (https://ji.unbari.ac.id/index.php/ilmiah/article/view/1950)
+[1] [World Health Organization. (2021). Stroke: Key facts](https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death)
+[2] [Utama, Y. A., & Nainggolan, S. S. (2022). Faktor resiko yang mempengaruhi kejadian stroke: sebuah tinjauan sistematis. *Jurnal Ilmiah Universitas Batanghari Jambi*, 22(1), 549-553.](https://ji.unbari.ac.id/index.php/ilmiah/article/view/1950)
+
 
