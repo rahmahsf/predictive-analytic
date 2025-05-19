@@ -23,10 +23,10 @@ Menjelaskan tujuan dari pernyataan masalah:
 - Melakukan eksplorasi data dan analisis fitur untuk mengetahui faktor-faktor signifikan yang memengaruhi risiko stroke.
 - Mengevaluasi performa model prediksi menggunakan metrik evaluasi seperti akurasi, precision, recall, dan F1-score 
 
-    ### Solution statements
-  - Membangun baseline model menggunakan Logistic Regression sebagai pembanding awal untuk mengukur performa dasar dengan metrik evaluasi seperti akurasi, precision, recall, F1-score.
-  - Melakukan hyperparameter tuning menggunakan GridSearchCV atau RandomizedSearchCV untuk memperoleh kombinasi parameter terbaik pada model unggulan berdasarkan evaluasi ROC-AUC rata-rata.
-  - Menangani ketidakseimbangan data kelas dengan menerapkan teknik resampling seperti SMOTE, undersampling, atau penyesuaian class weight agar model lebih sensitif terhadap prediksi kelas minoritas.
+### Solution statements
+- Membangun baseline model menggunakan Logistic Regression sebagai pembanding awal untuk mengukur performa dasar dengan metrik evaluasi seperti akurasi, precision, recall, F1-score.
+- Melakukan hyperparameter tuning menggunakan GridSearchCV atau RandomizedSearchCV untuk memperoleh kombinasi parameter terbaik pada model unggulan berdasarkan evaluasi ROC-AUC rata-rata.
+- Menangani ketidakseimbangan data kelas dengan menerapkan teknik resampling seperti SMOTE, undersampling, atau penyesuaian class weight agar model lebih sensitif terhadap prediksi kelas minoritas.
 
 ## Data Understanding
 [Dataset Stroke Prediction didapatkan dari Kaggle](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset), dataset ini digunakan untuk memprediksi apakah seorang pasien berisiko mengalami stroke berdasarkan beberapa parameter input seperti jenis kelamin, usia, riwayat penyakit (seperti hipertensi dan penyakit jantung), serta status merokok. Setiap baris dalam dataset ini memberikan informasi relevan mengenai masing-masing pasien, yang dapat membantu dalam membangun model prediktif untuk deteksi dini dan pencegahan stroke.
