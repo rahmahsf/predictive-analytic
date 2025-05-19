@@ -80,6 +80,6 @@ Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, probl
 
 _Catatan:_
 - _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- [1] World Health Organization. (2021). Stroke: Key facts. Retrieved from https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death
-- [[2] Utama, Y. A., & Nainggolan, S. S. (2022). Faktor resiko yang mempengaruhi kejadian stroke: sebuah tinjauan sistematis. Jurnal Ilmiah Universitas Batanghari Jambi, 22(1), 549-553.] (https://ji.unbari.ac.id/index.php/ilmiah/article/view/1950)
+[1] [World Health Organization. (2021). Stroke: Key facts]. (https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death)
+[2] [Utama, Y. A., & Nainggolan, S. S. (2022). Faktor resiko yang mempengaruhi kejadian stroke: sebuah tinjauan sistematis. Jurnal Ilmiah Universitas Batanghari Jambi, 22(1), 549-553.] (https://ji.unbari.ac.id/index.php/ilmiah/article/view/1950)
 
