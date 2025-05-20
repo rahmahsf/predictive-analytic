@@ -1,5 +1,5 @@
 # Laporan Proyek Machine Learning - Rahmah Sary Fadiyah
-!Resource/awal.jpeg
+![Alt Text](Resource/awal.jpeg)
 ## Domain Proyek : Kesehatan
 
 Stroke merupakan salah satu penyebab utama kematian dan kecacatan jangka panjang di seluruh dunia. Menurut World Health Organization (WHO), sekitar 15 juta orang mengalami stroke setiap tahunnya, dan sekitar 5 juta di antaranya meninggal dunia sementara 5 juta lainnya mengalami kecacatan permanen [1].
