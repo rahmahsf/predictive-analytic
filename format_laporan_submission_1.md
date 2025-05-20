@@ -1,5 +1,5 @@
 # Laporan Proyek Machine Learning - Rahmah Sary Fadiyah
-
+!Resource/awal.jpeg
 ## Domain Proyek : Kesehatan
 
 Stroke merupakan salah satu penyebab utama kematian dan kecacatan jangka panjang di seluruh dunia. Menurut World Health Organization (WHO), sekitar 15 juta orang mengalami stroke setiap tahunnya, dan sekitar 5 juta di antaranya meninggal dunia sementara 5 juta lainnya mengalami kecacatan permanen [1].
@@ -109,7 +109,7 @@ Berikut penjelasan singkat dalam bentuk kalimat untuk setiap atribut pada datase
 - Smoking Status adalah status merokok yang telah diubah ke bentuk numerik. Beberapa data memiliki kategori "Unknown" yang jumlahnya cukup banyak.
 Secara keseluruhan, data sudah cukup bersih namun terdapat beberapa nilai ekstrem yang perlu dianalisis lebih lanjut sebelum digunakan untuk pemodelan.
 
-![Alt Text](path/to/image.png)
+![Alt Text](Resource/matriks.PNG)
 
 | Pasangan Fitur                  | Korelasi | Interpretasi                                                                 |
 |--------------------------------|----------|------------------------------------------------------------------------------|
