@@ -39,24 +39,63 @@ Informasi Metadata:
  
 
 ### Variabel-variabel pada Stroke Prediction dataset adalah sebagai berikut:
-| No | Nama Atribut       | Tipe Data       | Deskripsi                                                                 |
-|----|--------------------|-----------------|---------------------------------------------------------------------------|
-| 1  | id                 | Integer         | ID unik pasien                                                            |
-| 2  | gender             | Kategori        | Jenis kelamin pasien: "Male", "Female", atau "Other"                     |
-| 3  | age                | Numerik (Float) | Usia pasien                                                               |
-| 4  | hypertension       | Biner (0/1)     | 0 jika pasien tidak menderita hipertensi, 1 jika ya                      |
-| 5  | heart_disease      | Biner (0/1)     | 0 jika pasien tidak memiliki penyakit jantung, 1 jika ya                 |
-| 6  | ever_married       | Kategori        | Status pernikahan: "Yes" atau "No"                                       |
-| 7  | work_type          | Kategori        | Jenis pekerjaan: "children", "Govt_job", "Never_worked", "Private", "Self-employed" |
-| 8  | Residence_type     | Kategori        | Jenis tempat tinggal: "Urban" atau "Rural"                               |
-| 9  | avg_glucose_level  | Numerik (Float) | Rata-rata kadar glukosa dalam darah                                      |
-|10  | bmi                | Numerik (Float) | Indeks massa tubuh                                                       |
-|11  | smoking_status     | Kategori        | Status merokok: "formerly smoked", "never smoked", "smokes", atau "Unknown" |
-|12  | stroke             | Biner (0/1)     | 1 jika pasien pernah terkena stroke, 0 jika tidak                         |
+- **id**: Merupakan ID unik untuk setiap pasien, bertipe data integer.
+- **gender** Menunjukkan jenis kelamin pasien dengan nilai "Male", "Female", atau "Other".
+- **age**: Usia pasien dalam bentuk numerik (float).
+- **hypertension**: Bernilai 0 jika pasien tidak menderita hipertensi, dan 1 jika menderita.
+- **heart_disease**: Bernilai 0 jika pasien tidak memiliki penyakit jantung, dan 1 jika memiliki.
+- **ever_married**: Status pernikahan pasien, dengan nilai "Yes" atau "No".
+- **work_type**: Jenis pekerjaan pasien, bisa berupa "children", "Govt_job", "Never_worked", "Private", atau "Self-employed".
+- **Residence_type**: Jenis tempat tinggal pasien, antara "Urban" dan "Rural".
+- **avg_glucose_level**: Rata-rata kadar glukosa darah pasien dalam satuan numerik (float).
+- **bmi**: Indeks massa tubuh pasien dalam bentuk numerik (float).
+- **smoking_status**: Status merokok pasien, terdiri dari "formerly smoked", "never smoked", "smokes", atau "Unknown".
+- **stroke**: Label target, bernilai 1 jika pasien pernah mengalami stroke, dan 0 jika tidak.
 
+**Exploratory Data Analysis - Deskripsi Variabel**
 
-**Rubrik/Kriteria Tambahan (Opsional)**:
-- Melakukan beberapa tahapan yang diperlukan untuk memahami data, contohnya teknik visualisasi data atau exploratory data analysis.
+| No | Kolom               | Non-Null Count | Tipe Data |
+|----|---------------------|----------------|-----------|
+| 0  | id                  | 5110 non-null  | int64     |
+| 1  | gender              | 5110 non-null  | object    |
+| 2  | age                 | 5110 non-null  | float64   |
+| 3  | hypertension        | 5110 non-null  | int64     |
+| 4  | heart_disease       | 5110 non-null  | int64     |
+| 5  | ever_married        | 5110 non-null  | object    |
+| 6  | work_type           | 5110 non-null  | object    |
+| 7  | Residence_type      | 5110 non-null  | object    |
+| 8  | avg_glucose_level   | 5110 non-null  | float64   |
+| 9  | bmi                 | 4909 non-null  | float64   |
+| 10 | smoking_status      | 5110 non-null  | object    |
+| 11 | stroke              | 5110 non-null  | int64     |
+
+Kolom `bmi` memiliki **201 nilai kosong (null)** dari total 5110 data. Nilai null ini perlu diatasi sebelum pelatihan model dengan cara **menghapus baris yang mengandung null** dan nanti jumlah data menjadi 4909.
+
+Berikut adalah kolom yang dihapus atau tidak digunakan dalam proses pelatihan model karena tidak relevan terhadap prediksi atau berfungsi hanya sebagai pengidentifikasi:
+- id karena kolom ini hanya berisi identitas unik pasien, tidak memiliki pengaruh terhadap risiko stroke.
+
+Variabel kategorikal yang di-encode menggunakan LabelEncoder:
+- gender: Jenis kelamin pasien, seperti "Male", "Female", dan "Other".
+- ever_married: Status pernikahan pasien, dengan nilai "Yes" atau "No".
+- work_type: Jenis pekerjaan pasien, contohnya "Private", "Self-employed", "Govt_job", "children", atau "Never_worked".
+- Residence_type: Jenis tempat tinggal pasien, yaitu "Urban" atau "Rural".
+- smoking_status: Status merokok pasien, seperti "never smoked", "formerly smoked", "smokes", dan "Unknown".
+Kelima variabel tersebut diubah ke dalam format numerik agar bisa digunakan oleh model machine learning. Variabel lain seperti age, hypertension, heart_disease, avg_glucose_level, bmi, dan stroke tidak perlu di-encode karena sudah dalam bentuk numerik atau biner.
+
+**Mengecek Duplikat data dan data yang outliner.**
+Data duplikat dari data tersebut dan tidak ada duplikat data
+
+| Statistik    | gender | age   | hypertension | heart_disease | ever_married | work_type | Residence_type | avg_glucose_level | bmi    | smoking_status |
+|--------------|--------|-------|--------------|---------------|--------------|-----------|----------------|-------------------|--------|----------------|
+| Count        | 4909   | 4909  | 4909         | 4909          | 4909         | 4909      | 4909           | 4909              | 4909   | 4909           |
+| Mean         | 0.41   | 42.87 | 0.09         | 0.05          | 0.65         | 2.17      | 0.51           | 105.31            | 28.89  | 1.38           |
+| Std Dev      | 0.49   | 22.56 | 0.29         | 0.22          | 0.48         | 1.09      | 0.50           | 44.42             | 7.85   | 1.07           |
+| Min          | 0      | 0.08  | 0            | 0             | 0            | 0         | 0              | 55.12             | 10.30  | 0              |
+| 25% (Q1)     | 0      | 25    | 0            | 0             | 0            | 2         | 0              | 77.07             | 23.50  | 0              |
+| 50% (Median) | 0      | 44    | 0            | 0             | 1            | 2         | 1              | 91.68             | 28.10  | 2              |
+| 75% (Q3)     | 1      | 60    | 0            | 0             | 1            | 3         | 1              | 113.57            | 33.10  | 2              |
+| Max          | 2      | 82    | 1            | 1             | 1            | 4         | 1              | 271.74            | 97.60  | 3              |
+
 
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
