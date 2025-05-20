@@ -109,6 +109,21 @@ Berikut penjelasan singkat dalam bentuk kalimat untuk setiap atribut pada datase
 - Smoking Status adalah status merokok yang telah diubah ke bentuk numerik. Beberapa data memiliki kategori "Unknown" yang jumlahnya cukup banyak.
 Secara keseluruhan, data sudah cukup bersih namun terdapat beberapa nilai ekstrem yang perlu dianalisis lebih lanjut sebelum digunakan untuk pemodelan.
 
+![Alt Text](path/to/image.png)
+
+| Pasangan Fitur                  | Korelasi | Interpretasi                                                                 |
+|--------------------------------|----------|------------------------------------------------------------------------------|
+| age – bmi                      | 0.33     | Korelasi positif sedang – Semakin tua, cenderung BMI semakin tinggi.        |
+| age – hypertension             | 0.28     | Korelasi positif lemah – Usia yang lebih tua cenderung memiliki hipertensi. |
+| age – heart_disease            | 0.26     | Korelasi positif lemah – Usia meningkat sedikit berkaitan dengan penyakit jantung. |
+| age – avg_glucose_level        | 0.24     | Korelasi positif lemah – Glukosa rata-rata sedikit meningkat seiring bertambahnya usia. |
+| bmi – avg_glucose_level        | 0.18     | Korelasi sangat lemah – Hubungan yang hampir tidak signifikan.              |
+| bmi – hypertension             | 0.17     | Korelasi sangat lemah – Orang dengan BMI tinggi sedikit cenderung memiliki hipertensi. |
+| avg_glucose_level – hypertension | 0.17   | Korelasi sangat lemah – Hubungan sangat kecil antara kadar glukosa dan hipertensi. |
+| avg_glucose_level – heart_disease | 0.16 | Korelasi sangat lemah – Hampir tidak ada korelasi antara glukosa dan penyakit jantung. |
+| bmi – heart_disease            | 0.04     | Korelasi hampir tidak ada – BMI tidak berhubungan signifikan dengan penyakit jantung. |
+| hypertension – heart_disease  | 0.11     | Korelasi sangat lemah – Sedikit hubungan antara hipertensi dan penyakit jantung. |
+
 ## Data Preparation
 Data preparation adalah tahap penting sebelum membangun model machine learning. Tahapan ini bertujuan untuk membersihkan, mengubah, dan menyusun ulang data agar dapat digunakan secara optimal oleh algoritma. Berikut adalah tahapan yang dilakukan:
 
