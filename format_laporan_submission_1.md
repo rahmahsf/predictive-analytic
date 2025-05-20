@@ -147,7 +147,24 @@ Dataset memiliki kolom bmi dengan sebagian nilai kosong (NaN). Untuk mengatasi h
 - Dengan membersihkan data dari missing value dan outlier, kita memastikan data yang digunakan representatif dan dapat dipercaya. Encoding diperlukan agar algoritma dapat memproses fitur kategorikal secara numerik. Pembagian dataset ke dalam data latih dan uji membantu menghindari overfitting dan mengevaluasi performa model secara objektif. Terakhir, standarisasi menjamin bahwa semua fitur numerik memiliki kontribusi yang seimbang dalam pelatihan model.
 Tanpa tahapan ini, risiko kesalahan interpretasi model dan penurunan performa menjadi sangat tinggi. Oleh karena itu, data preparation adalah langkah fundamental sebelum memasuki tahap pemodelan machine learning.
 ## Modeling
-Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
+Tahapan ini membahas proses membangun model machine learning dengan tiga algoritma berbeda, yaitu K-Nearest Neighbors (KNN), Decision Tree, dan Random Forest. Setiap model dilatih menggunakan dataset yang telah dibersihkan dan distandarisasi, lalu dilakukan evaluasi menggunakan metrik akurasi dan confusion matrix untuk memilih model terbaik.
+##K-Nearest Neighbors (KNN)##
+- 'from sklearn.neighbors import KNeighborsClassifier' Mengimpor kelas KNeighborsClassifier dari pustaka scikit-learn. KNN adalah algoritma berbasis *instance-based learning*.
+- 'knn = KNeighborsClassifier(n_neighbors=5)' Membuat objek model KNN dengan parameter n_neighbors=5, yang artinya model akan memprediksi label berdasarkan 5 tetangga terdekat.
+- 'knn_preds = knn.predict(X_test)' Melakukan prediksi pada data uji X_test menggunakan model KNN yang sudah dilatih.
+**Cara Kerja KNN:**
+- KNN bekerja dengan mencari k tetangga terdekat dari data yang akan diprediksi berdasarkan jarak (umumnya Euclidean).
+- Label yang paling sering muncul di antara tetangga terdekat akan digunakan sebagai hasil prediksi.
+**Kelebihan:**
+- **Sederhana dan intuitif**: KNN adalah algoritma non-parametrik berbasis instance, yang sangat mudah diimplementasikan dan tidak memerlukan asumsi distribusi data.
+- **Tidak memerlukan proses pelatihan eksplisit**: Karena bersifat lazy learner, seluruh proses klasifikasi terjadi saat prediksi, sehingga waktu pelatihan hampir tidak ada.
+- **Dapat digunakan untuk klasifikasi dan regresi**: Meski lebih umum digunakan untuk klasifikasi, KNN juga fleksibel untuk tugas regresi.
+**Kekurangan:**
+  - **Komputasi berat pada saat prediksi**: Karena membandingkan setiap data uji dengan seluruh data latih, waktu prediksi menjadi lambat jika dataset besar.
+  - **Sangat sensitif terhadap fitur yang tidak relevan atau memiliki skala berbeda**: Fitur yang memiliki skala lebih besar bisa mendominasi hasil perhitungan jarak jika tidak dilakukan normalisasi atau standarisasi.
+  - **Performa buruk pada data berdimensi tinggi (curse of dimensionality)** : Jarak antar titik cenderung menjadi homogen, sehingga efektivitas penentuan tetangga terdekat menurun.
+
+
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
