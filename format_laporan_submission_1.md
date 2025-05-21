@@ -218,9 +218,10 @@ Dalam proyek klasifikasi ini, metrik evaluasi yang digunakan adalah:
 1. **Akurasi (Accuracy)**  
    Akurasi mengukur proporsi prediksi yang benar dari keseluruhan data.  
    **Formula:**  
-   \[
-   \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
-   \]  
+   $$
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+$$
+  
    dimana:  
    - TP = True Positive (jumlah prediksi positif yang benar)  
    - TN = True Negative (jumlah prediksi negatif yang benar)  
@@ -230,23 +231,23 @@ Dalam proyek klasifikasi ini, metrik evaluasi yang digunakan adalah:
 2. **Precision (Presisi)**  
    Precision mengukur seberapa tepat prediksi positif yang dilakukan model.  
    **Formula:**  
-   \[
+   $$
    \text{Precision} = \frac{TP}{TP + FP}
-   \]
+   $$
 
 3. **Recall (Sensitivitas)**  
    Recall mengukur seberapa baik model dalam menemukan seluruh kasus positif yang sebenarnya.  
    **Formula:**  
-   \[
+   $$
    \text{Recall} = \frac{TP}{TP + FN}
-   \]
+   $$
 
 4. **F1 Score**  
    F1 Score adalah harmonic mean dari precision dan recall yang memberikan keseimbangan antara keduanya.  
    **Formula:**  
-   \[
+   $$
    F1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
-   \]
+   $$
 
 ---
 
