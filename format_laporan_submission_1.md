@@ -276,7 +276,9 @@ Kesimpulannya, pendekatan machine learning ini efektif dalam membantu deteksi di
 ---
 ## Refrensi
 [1] [World Health Organization. (2021). Stroke: Key facts](https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death)
+
 [2] [Utama, Y. A., & Nainggolan, S. S. (2022). Faktor resiko yang mempengaruhi kejadian stroke: sebuah tinjauan sistematis. *Jurnal Ilmiah Universitas Batanghari Jambi*, 22(1), 549-553.](https://ji.unbari.ac.id/index.php/ilmiah/article/view/1950)
+
 [3] [Setiawan, P. A. (2021). Diagnosis dan tatalaksana stroke hemoragik. Jurnal Medika Hutama, 3(01 Oktober), 1660-1665.](https://www.jurnalmedikahutama.com/index.php/JMH/article/view/336)
 
 
