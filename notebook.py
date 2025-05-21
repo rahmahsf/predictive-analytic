@@ -24,6 +24,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
+from IPython.display import display
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 
 """Mengimport semua library yang dibutuhkan
@@ -31,7 +32,7 @@ from sklearn.metrics import classification_report, confusion_matrix, accuracy_sc
 # Load Data
 """
 
-df = pd.read_csv('/content/drive/MyDrive/SPK/DBS/predictive analystic/healthcare-dataset-stroke-data.csv')
+df = pd.read_csv('healthcare-dataset-stroke-data.csv')
 df
 
 """Menampilkan seluruh data, data diawal terdapat 5110 data
