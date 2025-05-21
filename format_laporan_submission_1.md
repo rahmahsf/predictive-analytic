@@ -4,7 +4,7 @@
 
 Stroke merupakan salah satu penyebab utama kematian dan kecacatan jangka panjang di seluruh dunia. Menurut World Health Organization (WHO), sekitar 15 juta orang mengalami stroke setiap tahunnya, dan sekitar 5 juta di antaranya meninggal dunia sementara 5 juta lainnya mengalami kecacatan permanen [1].
 
-Stroke terjadi ketika pasokan darah ke otak terganggu atau berkurang, sehingga jaringan otak tidak mendapatkan oksigen dan nutrisi yang cukup. Dalam banyak kasus, stroke bisa dicegah apabila faktor risikonya dapat dikenali sejak dini, seperti faktor utama penyebab stroke adalah hipertensi, selain itu juga faktor resiko laninya adalah merokok, diabetes melitus dan dispidemia [2].
+Stroke terjadi ketika pasokan darah ke otak terganggu atau berkurang, sehingga jaringan otak tidak mendapatkan oksigen dan nutrisi yang cukup. Dalam banyak kasus, stroke bisa dicegah apabila faktor risikonya dapat dikenali sejak dini, seperti faktor utama penyebab stroke adalah hipertensi, selain itu juga faktor resiko laninya adalah merokok, diabetes melitus dan dispidemia [2]. Selain hipertensi, penyebab stroke bisa dipengaruhi oleh ras/suku, jenis kelamin dan usia. Usia yang paling tinggi beresiko terkena stroke  yaitu usia lansia ≥75tahun [3].
 
 Namun, banyak pasien tidak menyadari adanya risiko ini sampai mereka benar-benar mengalami stroke. Oleh karena itu, pemanfaatan teknologi prediktif berbasis machine learning dapat menjadi solusi untuk mendeteksi potensi stroke lebih awal dengan memanfaatkan data medis dan gaya hidup pasien.
 
@@ -24,9 +24,9 @@ Menjelaskan tujuan dari pernyataan masalah:
 - Mengevaluasi performa model prediksi menggunakan metrik evaluasi seperti akurasi, precision, recall, dan F1-score 
 
 ### Solution statements
-- Membangun baseline model menggunakan Logistic Regression sebagai pembanding awal untuk mengukur performa dasar dengan metrik evaluasi seperti akurasi, precision, recall, F1-score.
-- Melakukan hyperparameter tuning menggunakan GridSearchCV atau RandomizedSearchCV untuk memperoleh kombinasi parameter terbaik pada model unggulan berdasarkan evaluasi ROC-AUC rata-rata.
-- Menangani ketidakseimbangan data kelas dengan menerapkan teknik resampling seperti SMOTE, undersampling, atau penyesuaian class weight agar model lebih sensitif terhadap prediksi kelas minoritas.
+- Menganalisis dataset secara eksploratif untuk memahami distribusi fitur dan target dari dataset stroke
+- Selanjutnya, dilakukan percobaan menggunakan tiga algoritma berbeda yaitu K-Nearest Neighbors (KNN), Decision Tree, dan Random Forest. Setiap model dilatih dan dievaluasi menggunakan metrik yang sama
+- Berdasarkan keseluruhan hasil evaluasi, model terbaik dipilih dengan mempertimbangkan akurasi tinggi.
 
 ## Data Understanding
 [Dataset Stroke Prediction didapatkan dari Kaggle](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset), dataset ini digunakan untuk memprediksi apakah seorang pasien berisiko mengalami stroke berdasarkan beberapa parameter input seperti jenis kelamin, usia, riwayat penyakit (seperti hipertensi dan penyakit jantung), serta status merokok. Setiap baris dalam dataset ini memberikan informasi relevan mengenai masing-masing pasien, yang dapat membantu dalam membangun model prediktif untuk deteksi dini dan pencegahan stroke.
@@ -104,8 +104,8 @@ Berikut penjelasan singkat dalam bentuk kalimat untuk setiap atribut pada datase
 - Ever Married adalah status pernikahan (0 = belum, 1 = sudah), dengan mayoritas responden sudah menikah.
 - Work Type adalah jenis pekerjaan yang telah dikodekan, mayoritas bekerja di sektor swasta.
 - Residence Type menunjukkan tempat tinggal (0 = pedesaan, 1 = perkotaan), distribusinya hampir seimbang.
-- Average Glucose Level adalah kadar glukosa rata-rata dalam darah. Terdapat beberapa nilai tinggi (>200) yang masih masuk akal secara medis, namun perlu dicek sebagai outlier potensial.
-- BMI (Body Mass Index) menunjukkan indeks massa tubuh. Terdapat nilai sangat rendah dan sangat tinggi yang kemungkinan adalah outlier.
+- Average Glucose Level adalah kadar glukosa rata-rata dalam darah. Terdapat beberapa nilai tinggi (>200) yang masih masuk akal secara medis.
+- BMI (Body Mass Index) menunjukkan indeks massa tubuh.
 - Smoking Status adalah status merokok yang telah diubah ke bentuk numerik. Beberapa data memiliki kategori "Unknown" yang jumlahnya cukup banyak.
 Secara keseluruhan, data sudah cukup bersih namun terdapat beberapa nilai ekstrem yang perlu dianalisis lebih lanjut sebelum digunakan untuk pemodelan.
 
@@ -171,7 +171,8 @@ Tahapan ini membahas proses membangun model machine learning dengan tiga algorit
 **Decision Tree**
 - `from sklearn.tree import DecisionTreeClassifier`  Mengimpor kelas DecisionTreeClassifier dari scikit-learn. Model ini digunakan untuk klasifikasi berbasis Desicion tree.
 - `dt = DecisionTreeClassifier(max_depth=10, random_state=42)`  Membuat objek model Decision Tree dengan kedalaman maksimum pohon 10 dan seed acak 42 agar hasil konsisten.
-- `dt.fit(X_train, y_train)`  Menghasilkan prediksi label dari data uji X_test.
+- `dt.fit(X_train, y_train)`  Melatih model dengan data latih X_train dan y_train.
+- `dt_preds = dt.predict(X_test)` Menghasilkan prediksi label dari data uji X_test.
 
 **Cara Kerja Decision Tree:**
   - Decision Tree memecah data berdasarkan fitur yang memberikan informasi paling banyak (impurity minimum) menggunakan kriteria seperti Gini atau Entropy.
@@ -220,16 +221,16 @@ Dalam proyek klasifikasi ini, conflusion metriks dimana:
    - FN = False Negative (jumlah prediksi negatif yang salah)
  
 1. **Akurasi (Accuracy)**  
-   Akurasi mengukur proporsi prediksi yang benar dari keseluruhan data.  
+   Akurasi mengukur proporsi prediksi yang benar dari keseluruhan data. Akurasi tinggi tidak selalu berarti model bagus, terutama kalau dataset sangat tidak seimbang (misal kelas positif sangat sedikit). Karena model bisa saja hanya memprediksi kelas mayoritas dan tetap mendapatkan akurasi tinggi. 
    **Formula:**
    ![Alt Text](Resource/akurasi.png)
 
-3. **Precision (Presisi)**  
-   Precision mengukur seberapa tepat prediksi positif yang dilakukan model.  
+3. **Precision (Presisi)**
+   Mengukur seberapa banyak prediksi positif yang benar. Jika precision = 0, berarti model tidak bisa memprediksi positif dengan benar sama sekali.
    **Formula:**  
    ![Alt Text](Resource/presisi.png)
 
-4. **Recall (Sensitivitas)**  
+5. **Recall (Sensitivitas)**  
    Recall mengukur seberapa baik model dalam menemukan seluruh kasus positif yang sebenarnya.  
    **Formula:**
    ![Alt Text](Resource/recall.jpg)
@@ -251,7 +252,7 @@ Dari hasil evaluasi, dapat disimpulkan bahwa:
   Meskipun akurasi training dan testing KNN terlihat cukup tinggi (96% dan 94.25%), nilai precision, recall, dan F1 score pada data testing adalah 0.0000. Hal ini menunjukkan bahwa model KNN gagal mengklasifikasikan kelas positif sama sekali pada data uji. Dengan kata lain, KNN mengalami zero precision dan zero recall, sehingga tidak cocok digunakan untuk kasus ini.
 
 - **Decision Tree**
-  Decision Tree memiliki akurasi 100% pada data training, namun hanya 92.09% pada data testing, mengindikasikan adanya overfitting. Meski begitu, model masih memberikan precision sebesar 23.26% dan recall 18.52% di testing, menghasilkan F1 score sebesar 0.2062. Ini lebih baik dibanding KNN, namun performanya masih tergolong rendah dalam mendeteksi kelas positif.
+  Decision Tree memiliki akurasi 100% pada data training, namun hanya 92.09% pada data testing. Meski begitu, model masih memberikan precision sebesar 23.26% dan recall 18.52% di testing, menghasilkan F1 score sebesar 0.2062. Ini lebih baik dibanding KNN, namun performanya masih tergolong rendah dalam mendeteksi kelas positif.
   
 - **Random Forest**
 Model ini memiliki performa sangat baik pada data training (hampir sempurna), tetapi precision, recall, dan F1 score-nya nol pada data testing. Artinya, Random Forest mengalami overfitting ekstrem dan gagal mengeneralisasi ke data baru, serupa dengan KNN. Kemungkinan besar, kelas minoritas tidak terdeteksi sama sekali dalam proses prediksi testing.
@@ -262,19 +263,20 @@ Model ini memiliki performa sangat baik pada data training (hampir sempurna), te
 
 **Memilih model terbaik**
 
-Fokus utama evaluasi adalah pada tingkat akurasi test tertinggi, maka model Random Forest menjadi pilihan terbaik. Dengan akurasi pengujian sebesar 94,45%, model ini menunjukkan kinerja prediksi keseluruhan yang sangat baik
+- **Decision Tree lebih baik dibanding KNN dan Random Forest** untuk kasus ini karena masih memberikan nilai precision, recall, dan F1 score di data testing, walaupun performanya masih rendah secara absolut.
+- KNN dan Random Forest gagal sama sekali dalam mendeteksi kelas positif pada data testing (precision dan recall = 0).
 
----
 
 ## Kesimpulan
 
-Metrik evaluasi yang digunakan telah sesuai dengan konteks klasifikasi yang menuntut keseimbangan antara mengidentifikasi positif yang sebenarnya dan meminimalkan kesalahan prediksi positif. Berdasarkan hasil evaluasi, model ini sudah layak untuk digunakan sebagai solusi dalam problem statement yang diberikan.
+Model klasifikasi berbasis machine learning dapat digunakan untuk mengidentifikasi individu dengan risiko tinggi terkena stroke dengan memanfaatkan data kesehatan dasar dan gaya hidup, seperti usia, jenis kelamin, hipertensi, penyakit jantung, status merokok, BMI, tingkat glukosa, dan aktivitas fisik. Melalui proses preprocessing data, pemilihan fitur penting, serta pelatihan model seperti Logistic Regression, Decision Tree, Random Forest, dan KNN, sistem mampu mengenali pola-pola risiko stroke. Fitur usia, hipertensi, riwayat penyakit jantung, tingkat glukosa darah, dan kebiasaan merokok terbukti menjadi indikator utama yang memengaruhi risiko stroke. Model yang dikembangkan mencapai akurasi di atas 92% pada data uji, namun untuk evaluasi yang lebih komprehensif digunakan pula metrik precision, recall, dan F1-score, di mana Decision Tree menunjukkan keseimbangan terbaik dalam mendeteksi kasus positif meski precision masih bisa ditingkatkan.
 
+Kesimpulannya, pendekatan machine learning ini efektif dalam membantu deteksi dini risiko stroke dengan mengandalkan fitur kesehatan dan gaya hidup yang relevan. Kombinasi pemilihan fitur yang tepat, penanganan ketidakseimbangan data, serta tuning parameter model menjadikan sistem ini alat pendukung keputusan yang potensial untuk pencegahan stroke, baik pada tingkat individu maupun populasi luas. Dengan demikian, implementasi teknologi ini dapat mempercepat intervensi medis dan meningkatkan kualitas hidup pasien yang berisiko tinggi.
 
-
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
+---
+## Refrensi
 [1] [World Health Organization. (2021). Stroke: Key facts](https://www.who.int/news-room/fact-sheets/detail/the-top-10-causes-of-death)
 [2] [Utama, Y. A., & Nainggolan, S. S. (2022). Faktor resiko yang mempengaruhi kejadian stroke: sebuah tinjauan sistematis. *Jurnal Ilmiah Universitas Batanghari Jambi*, 22(1), 549-553.](https://ji.unbari.ac.id/index.php/ilmiah/article/view/1950)
+[3] [Setiawan, P. A. (2021). Diagnosis dan tatalaksana stroke hemoragik. Jurnal Medika Hutama, 3(01 Oktober), 1660-1665.](https://www.jurnalmedikahutama.com/index.php/JMH/article/view/336)
 
 
