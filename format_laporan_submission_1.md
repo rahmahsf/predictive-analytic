@@ -213,61 +213,55 @@ Tahapan ini membahas proses membangun model machine learning dengan tiga algorit
 - **Lambat saat prediksi**: Meski lebih cepat daripada KNN, prediksi pada Random Forest tetap lebih lambat dibanding model sederhana karena banyaknya komponen (n_estimators).
 
 ## Evaluation
-Dalam proyek klasifikasi ini, metrik evaluasi yang digunakan adalah:
-
-1. **Akurasi (Accuracy)**  
-   Akurasi mengukur proporsi prediksi yang benar dari keseluruhan data.  
-   **Formula:**  
-   $$
-\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
-$$
-  
-   dimana:  
+Dalam proyek klasifikasi ini, conflusion metriks dimana:  
    - TP = True Positive (jumlah prediksi positif yang benar)  
    - TN = True Negative (jumlah prediksi negatif yang benar)  
    - FP = False Positive (jumlah prediksi positif yang salah)  
-   - FN = False Negative (jumlah prediksi negatif yang salah)  
+   - FN = False Negative (jumlah prediksi negatif yang salah)
+ 
+1. **Akurasi (Accuracy)**  
+   Akurasi mengukur proporsi prediksi yang benar dari keseluruhan data.  
+   **Formula:**
+   ![Alt Text](Resource/akurasi.png)
 
-2. **Precision (Presisi)**  
+3. **Precision (Presisi)**  
    Precision mengukur seberapa tepat prediksi positif yang dilakukan model.  
    **Formula:**  
-   $$
-   \text{Precision} = \frac{TP}{TP + FP}
-   $$
+   ![Alt Text](Resource/presisi.png)
 
-3. **Recall (Sensitivitas)**  
+4. **Recall (Sensitivitas)**  
    Recall mengukur seberapa baik model dalam menemukan seluruh kasus positif yang sebenarnya.  
-   **Formula:**  
-   $$
-   \text{Recall} = \frac{TP}{TP + FN}
-   $$
+   **Formula:**
+   ![Alt Text](Resource/recall.jpg)
 
-4. **F1 Score**  
+6. **F1 Score**  
    F1 Score adalah harmonic mean dari precision dan recall yang memberikan keseimbangan antara keduanya.  
-   **Formula:**  
-   $$
-   F1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
-   $$
-
----
+    ![Alt Text](Resource/f1scoree.png)
 
 ## Hasil Evaluasi Proyek
 
-| Metrik    | Nilai (%) |
-|-----------|-----------|
-| Accuracy  | 92.5      |
-| Precision | 90.3      |
-| Recall    | 88.7      |
-| F1 Score  | 89.5      |
+| Model         | Train Accuracy | Test Accuracy | Train Precision | Test Precision | Train Recall | Test Recall | Train F1 | Test F1 |
+|---------------|----------------|----------------|------------------|-----------------|---------------|--------------|-----------|----------|
+| KNN           | 0.9602         | 0.9425         | 0.5000           | 0.0000          | 0.0194        | 0.0000       | 0.0373    | 0.0000   |
+| Decision Tree | 1.0000         | 0.9209         | 1.0000           | 0.2326          | 1.0000        | 0.1852       | 1.0000    | 0.2062   |
+| Random Forest | 0.9997         | 0.9446         | 1.0000           | 0.0000          | 0.9935        | 0.0000       | 0.9968    | 0.0000   |
 
-Dari hasil evaluasi, dapat disimpulkan bahwa model memiliki tingkat akurasi yang tinggi sebesar 92.5%, yang berarti model berhasil memprediksi dengan benar sebanyak 92.5% dari seluruh data pengujian.
+Dari hasil evaluasi, dapat disimpulkan bahwa:
+- **KNN (K-Nearest Neighbors)**
+  Meskipun akurasi training dan testing KNN terlihat cukup tinggi (96% dan 94.25%), nilai precision, recall, dan F1 score pada data testing adalah 0.0000. Hal ini menunjukkan bahwa model KNN gagal mengklasifikasikan kelas positif sama sekali pada data uji. Dengan kata lain, KNN mengalami zero precision dan zero recall, sehingga tidak cocok digunakan untuk kasus ini.
 
-Precision sebesar 90.3% menunjukkan bahwa ketika model memprediksi kelas positif, 90.3% prediksi tersebut benar-benar positif, mengindikasikan rendahnya tingkat false positive.
+- **Decision Tree**
+  Decision Tree memiliki akurasi 100% pada data training, namun hanya 92.09% pada data testing, mengindikasikan adanya overfitting. Meski begitu, model masih memberikan precision sebesar 23.26% dan recall 18.52% di testing, menghasilkan F1 score sebesar 0.2062. Ini lebih baik dibanding KNN, namun performanya masih tergolong rendah dalam mendeteksi kelas positif.
+  
+- **Random Forest**
+Model ini memiliki performa sangat baik pada data training (hampir sempurna), tetapi precision, recall, dan F1 score-nya nol pada data testing. Artinya, Random Forest mengalami overfitting ekstrem dan gagal mengeneralisasi ke data baru, serupa dengan KNN. Kemungkinan besar, kelas minoritas tidak terdeteksi sama sekali dalam proses prediksi testing.
 
-Recall sebesar 88.7% menunjukkan model mampu menangkap hampir 89% dari seluruh kasus positif yang sebenarnya, yang artinya model tidak banyak melewatkan kasus positif.
+  ![Alt Text](Resource/metrix.png)
+  Berdasarkan hasil visualisasi confusion matrix, model KNN menghasilkan 0 True Positive (TP), 54 False Negative (FN), 918 True Negative (TN), dan 2 False Positive (FP). Model Decision Tree menunjukkan 10 TP, 44 FN, 887 TN, dan 33 FP. Sementara itu, model Random Forest memiliki 0 TP, 54 FN, 920 TN, dan 0 FP. Nilai-nilai ini mencerminkan bagaimana masing-masing model melakukan klasifikasi terhadap kelas positif dan negatif pada data pengujian.
 
-Nilai F1 Score sebesar 89.5% menegaskan bahwa keseimbangan antara precision dan recall cukup baik, sehingga model ini efektif dalam klasifikasi terutama bila distribusi kelas tidak seimbang.
+**Memilih model terbaik**
 
+fokus utama evaluasi adalah pada tingkat akurasi test tertinggi, maka model Random Forest menjadi pilihan terbaik. Dengan akurasi pengujian sebesar 94,45%, model ini menunjukkan kinerja prediksi keseluruhan yang sangat baik.
 ---
 
 ## Kesimpulan
