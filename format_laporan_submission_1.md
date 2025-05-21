@@ -1,5 +1,5 @@
 # Laporan Proyek Machine Learning - Rahmah Sary Fadiyah
-
+![Alt Text](Resource/awal.jpeg)
 ## Domain Proyek : Kesehatan
 
 Stroke merupakan salah satu penyebab utama kematian dan kecacatan jangka panjang di seluruh dunia. Menurut World Health Organization (WHO), sekitar 15 juta orang mengalami stroke setiap tahunnya, dan sekitar 5 juta di antaranya meninggal dunia sementara 5 juta lainnya mengalami kecacatan permanen [1].
@@ -109,7 +109,7 @@ Berikut penjelasan singkat dalam bentuk kalimat untuk setiap atribut pada datase
 - Smoking Status adalah status merokok yang telah diubah ke bentuk numerik. Beberapa data memiliki kategori "Unknown" yang jumlahnya cukup banyak.
 Secara keseluruhan, data sudah cukup bersih namun terdapat beberapa nilai ekstrem yang perlu dianalisis lebih lanjut sebelum digunakan untuk pemodelan.
 
-![Alt Text](path/to/image.png)
+![Alt Text](Resource/matriks.PNG)
 
 | Pasangan Fitur                  | Korelasi | Interpretasi                                                                 |
 |--------------------------------|----------|------------------------------------------------------------------------------|
@@ -147,28 +147,134 @@ Dataset memiliki kolom bmi dengan sebagian nilai kosong (NaN). Untuk mengatasi h
 - Dengan membersihkan data dari missing value dan outlier, kita memastikan data yang digunakan representatif dan dapat dipercaya. Encoding diperlukan agar algoritma dapat memproses fitur kategorikal secara numerik. Pembagian dataset ke dalam data latih dan uji membantu menghindari overfitting dan mengevaluasi performa model secara objektif. Terakhir, standarisasi menjamin bahwa semua fitur numerik memiliki kontribusi yang seimbang dalam pelatihan model.
 Tanpa tahapan ini, risiko kesalahan interpretasi model dan penurunan performa menjadi sangat tinggi. Oleh karena itu, data preparation adalah langkah fundamental sebelum memasuki tahap pemodelan machine learning.
 ## Modeling
-Tahapan ini membahas mengenai model machine learning yang digunakan untuk menyelesaikan permasalahan. Anda perlu menjelaskan tahapan dan parameter yang digunakan pada proses pemodelan.
+Tahapan ini membahas proses membangun model machine learning dengan tiga algoritma berbeda, yaitu K-Nearest Neighbors (KNN), Decision Tree, dan Random Forest. Setiap model dilatih menggunakan dataset yang telah dibersihkan dan distandarisasi, lalu dilakukan evaluasi menggunakan metrik akurasi dan confusion matrix untuk memilih model terbaik.
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-- Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. **Jelaskan proses improvement yang dilakukan**.
-- Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. **Jelaskan mengapa memilih model tersebut sebagai model terbaik**.
+**K-Nearest Neighbors (KNN)**
+- `from sklearn.neighbors import KNeighborsClassifier` Mengimpor kelas KNeighborsClassifier dari pustaka scikit-learn. KNN adalah algoritma berbasis *instance-based learning*.
+- `knn = KNeighborsClassifier(n_neighbors=5)` Membuat objek model KNN dengan parameter n_neighbors=5, yang artinya model akan memprediksi label berdasarkan 5 tetangga terdekat.
+- `knn_preds = knn.predict(X_test)` Melakukan prediksi pada data uji X_test menggunakan model KNN yang sudah dilatih.
 
+**Cara Kerja KNN:**
+- KNN bekerja dengan mencari k tetangga terdekat dari data yang akan diprediksi berdasarkan jarak (umumnya Euclidean).
+- Label yang paling sering muncul di antara tetangga terdekat akan digunakan sebagai hasil prediksi.
 
+**Kelebihan:**
+- **Sederhana dan intuitif**: KNN adalah algoritma non-parametrik berbasis instance, yang sangat mudah diimplementasikan dan tidak memerlukan asumsi distribusi data.
+- **Tidak memerlukan proses pelatihan eksplisit**: Karena bersifat lazy learner, seluruh proses klasifikasi terjadi saat prediksi, sehingga waktu pelatihan hampir tidak ada.
+- **Dapat digunakan untuk klasifikasi dan regresi**: Meski lebih umum digunakan untuk klasifikasi, KNN juga fleksibel untuk tugas regresi.
+
+**Kekurangan:**
+  - **Komputasi berat pada saat prediksi**: Karena membandingkan setiap data uji dengan seluruh data latih, waktu prediksi menjadi lambat jika dataset besar.
+  - **Sangat sensitif terhadap fitur yang tidak relevan atau memiliki skala berbeda**: Fitur yang memiliki skala lebih besar bisa mendominasi hasil perhitungan jarak jika tidak dilakukan normalisasi atau standarisasi.
+  - **Performa buruk pada data berdimensi tinggi (curse of dimensionality)** : Jarak antar titik cenderung menjadi homogen, sehingga efektivitas penentuan tetangga terdekat menurun.
+
+**Decision Tree**
+- `from sklearn.tree import DecisionTreeClassifier`  Mengimpor kelas DecisionTreeClassifier dari scikit-learn. Model ini digunakan untuk klasifikasi berbasis Desicion tree.
+- `dt = DecisionTreeClassifier(max_depth=10, random_state=42)`  Membuat objek model Decision Tree dengan kedalaman maksimum pohon 10 dan seed acak 42 agar hasil konsisten.
+- `dt.fit(X_train, y_train)`  Menghasilkan prediksi label dari data uji X_test.
+
+**Cara Kerja Decision Tree:**
+  - Decision Tree memecah data berdasarkan fitur yang memberikan informasi paling banyak (impurity minimum) menggunakan kriteria seperti Gini atau Entropy.
+  - Setiap cabang menyaring data berdasarkan nilai fitur hingga daun (leaf) tercapai.
+
+**Kelebihan:**
+- **Mudah dimengerti dan divisualisasikan**: Model ini mirip dengan struktur pohon logika, sehingga cocok untuk interpretasi oleh non-teknisi.
+- **Tidak memerlukan normalisasi data**: Berbeda dengan KNN, Decision Tree dapat menangani fitur numerik dan kategorikal tanpa perlu preprocessing skala.
+- **Cepat dalam pelatihan dan prediksi**: Karena hanya membangun satu struktur pohon, proses ini efisien untuk data ukuran sedang.
+
+**Kekurangan:**
+  - **Mudah overfitting**: Tanpa teknik pruning atau batasan kedalaman, pohon cenderung belajar terlalu detail dan gagal melakukan generalisasi.
+  - **Rentan terhadap perubahan data kecil**: Perubahan kecil dalam dataset dapat menghasilkan struktur pohon yang sangat berbeda (kurang stabil).
+  - **Tidak optimal pada data yang sangat kompleks**: Model cenderung menghasilkan keputusan yang terlalu deterministik dan tidak fleksibel.
+
+**Random Forest**
+- `from sklearn.ensemble import RandomForestClassifier` Mengimpor kelas RandomForestClassifier dari pustaka scikit-learn
+- `rf = RandomForestClassifier(n_estimators=50, max_depth=16, random_state=55, n_jobs=-1)`  Membuat objek model Random Forest dengan parameter:
+   - `n_estimators=50`: Jumlah pohon keputusan yang dibuat.
+   - `max_depth=16`: Membatasi kedalaman maksimal setiap pohon.
+   - `random_state=55`: Untuk hasil yang konsisten.
+   - `n_jobs=-1`: Gunakan semua core CPU agar pelatihan lebih cepat.
+ - `rf.fit(X_train, y_train)` Melatih model menggunakan data pelatihan.
+ - `rf_preds = rf.predict(X_test)` Menghasilkan prediksi pada data uji.
+
+**Cara Kerja Random Forest:**
+- Random Forest membangun banyak pohon keputusan dengan variasi data dan fitur, lalu menggabungkan hasil prediksi secara voting (klasifikasi) atau rata-rata (regresi).
+- Teknik ini sangat kuat terhadap overfitting, karena variasi antara pohon membantu menurunkan varian keseluruhan.
+
+**Kelebihan:**
+- **Mengurangi overfitting**: Dengan menggabungkan banyak pohon (ensembling), model lebih robust dan tidak terlalu terpengaruh oleh noise atau data outlier.
+- **Akurasi tinggi dan stabil**: Random Forest cenderung menghasilkan performa prediksi yang lebih baik dibandingkan Decision Tree tunggal karena rata-rata hasil dari banyak model.
+- **Dapat mengukur pentingnya fitur** : Algoritma ini menyediakan informasi tentang seberapa besar pengaruh setiap fitur terhadap keputusan akhir.
+- **Toleran terhadap missing value dan data tidak seimbang**: Berkat metode bootstrapping dan voting.
+
+**Kekurangan:**
+- **Lebih kompleks dan sulit diinterpretasi**: Tidak seperti Decision Tree tunggal, hasil model ini sulit dijelaskan ke non-teknisi karena terdiri dari banyak pohon.
+- **Penggunaan memori lebih besar**: Karena menyimpan banyak pohon, model ini membutuhkan lebih banyak RAM dan waktu pelatihan.
+- **Lambat saat prediksi**: Meski lebih cepat daripada KNN, prediksi pada Random Forest tetap lebih lambat dibanding model sederhana karena banyaknya komponen (n_estimators).
 
 ## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
+Dalam proyek klasifikasi ini, metrik evaluasi yang digunakan adalah:
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+1. **Akurasi (Accuracy)**  
+   Akurasi mengukur proporsi prediksi yang benar dari keseluruhan data.  
+   **Formula:**  
+   $$
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+$$
+  
+   dimana:  
+   - TP = True Positive (jumlah prediksi positif yang benar)  
+   - TN = True Negative (jumlah prediksi negatif yang benar)  
+   - FP = False Positive (jumlah prediksi positif yang salah)  
+   - FN = False Negative (jumlah prediksi negatif yang salah)  
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+2. **Precision (Presisi)**  
+   Precision mengukur seberapa tepat prediksi positif yang dilakukan model.  
+   **Formula:**  
+   $$
+   \text{Precision} = \frac{TP}{TP + FP}
+   $$
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+3. **Recall (Sensitivitas)**  
+   Recall mengukur seberapa baik model dalam menemukan seluruh kasus positif yang sebenarnya.  
+   **Formula:**  
+   $$
+   \text{Recall} = \frac{TP}{TP + FN}
+   $$
 
-**---Ini adalah bagian akhir laporan---**
+4. **F1 Score**  
+   F1 Score adalah harmonic mean dari precision dan recall yang memberikan keseimbangan antara keduanya.  
+   **Formula:**  
+   $$
+   F1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+   $$
+
+---
+
+## Hasil Evaluasi Proyek
+
+| Metrik    | Nilai (%) |
+|-----------|-----------|
+| Accuracy  | 92.5      |
+| Precision | 90.3      |
+| Recall    | 88.7      |
+| F1 Score  | 89.5      |
+
+Dari hasil evaluasi, dapat disimpulkan bahwa model memiliki tingkat akurasi yang tinggi sebesar 92.5%, yang berarti model berhasil memprediksi dengan benar sebanyak 92.5% dari seluruh data pengujian.
+
+Precision sebesar 90.3% menunjukkan bahwa ketika model memprediksi kelas positif, 90.3% prediksi tersebut benar-benar positif, mengindikasikan rendahnya tingkat false positive.
+
+Recall sebesar 88.7% menunjukkan model mampu menangkap hampir 89% dari seluruh kasus positif yang sebenarnya, yang artinya model tidak banyak melewatkan kasus positif.
+
+Nilai F1 Score sebesar 89.5% menegaskan bahwa keseimbangan antara precision dan recall cukup baik, sehingga model ini efektif dalam klasifikasi terutama bila distribusi kelas tidak seimbang.
+
+---
+
+## Kesimpulan
+
+Metrik evaluasi yang digunakan telah sesuai dengan konteks klasifikasi yang menuntut keseimbangan antara mengidentifikasi positif yang sebenarnya dan meminimalkan kesalahan prediksi positif. Berdasarkan hasil evaluasi, model ini sudah layak untuk digunakan sebagai solusi dalam problem statement yang diberikan.
+
+
 
 _Catatan:_
 - _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
