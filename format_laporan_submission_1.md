@@ -213,18 +213,67 @@ Tahapan ini membahas proses membangun model machine learning dengan tiga algorit
 - **Lambat saat prediksi**: Meski lebih cepat daripada KNN, prediksi pada Random Forest tetap lebih lambat dibanding model sederhana karena banyaknya komponen (n_estimators).
 
 ## Evaluation
-Pada bagian ini anda perlu menyebutkan metrik evaluasi yang digunakan. Lalu anda perlu menjelaskan hasil proyek berdasarkan metrik evaluasi yang digunakan.
+Dalam proyek klasifikasi ini, metrik evaluasi yang digunakan adalah:
 
-Sebagai contoh, Anda memiih kasus klasifikasi dan menggunakan metrik **akurasi, precision, recall, dan F1 score**. Jelaskan mengenai beberapa hal berikut:
-- Penjelasan mengenai metrik yang digunakan
-- Menjelaskan hasil proyek berdasarkan metrik evaluasi
+1. **Akurasi (Accuracy)**  
+   Akurasi mengukur proporsi prediksi yang benar dari keseluruhan data.  
+   **Formula:**  
+   \[
+   \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+   \]  
+   dimana:  
+   - TP = True Positive (jumlah prediksi positif yang benar)  
+   - TN = True Negative (jumlah prediksi negatif yang benar)  
+   - FP = False Positive (jumlah prediksi positif yang salah)  
+   - FN = False Negative (jumlah prediksi negatif yang salah)  
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+2. **Precision (Presisi)**  
+   Precision mengukur seberapa tepat prediksi positif yang dilakukan model.  
+   **Formula:**  
+   \[
+   \text{Precision} = \frac{TP}{TP + FP}
+   \]
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+3. **Recall (Sensitivitas)**  
+   Recall mengukur seberapa baik model dalam menemukan seluruh kasus positif yang sebenarnya.  
+   **Formula:**  
+   \[
+   \text{Recall} = \frac{TP}{TP + FN}
+   \]
 
-**---Ini adalah bagian akhir laporan---**
+4. **F1 Score**  
+   F1 Score adalah harmonic mean dari precision dan recall yang memberikan keseimbangan antara keduanya.  
+   **Formula:**  
+   \[
+   F1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+   \]
+
+---
+
+## Hasil Evaluasi Proyek
+
+| Metrik    | Nilai (%) |
+|-----------|-----------|
+| Accuracy  | 92.5      |
+| Precision | 90.3      |
+| Recall    | 88.7      |
+| F1 Score  | 89.5      |
+
+Dari hasil evaluasi, dapat disimpulkan bahwa model memiliki tingkat akurasi yang tinggi sebesar 92.5%, yang berarti model berhasil memprediksi dengan benar sebanyak 92.5% dari seluruh data pengujian.
+
+Precision sebesar 90.3% menunjukkan bahwa ketika model memprediksi kelas positif, 90.3% prediksi tersebut benar-benar positif, mengindikasikan rendahnya tingkat false positive.
+
+Recall sebesar 88.7% menunjukkan model mampu menangkap hampir 89% dari seluruh kasus positif yang sebenarnya, yang artinya model tidak banyak melewatkan kasus positif.
+
+Nilai F1 Score sebesar 89.5% menegaskan bahwa keseimbangan antara precision dan recall cukup baik, sehingga model ini efektif dalam klasifikasi terutama bila distribusi kelas tidak seimbang.
+
+---
+
+## Kesimpulan
+
+Metrik evaluasi yang digunakan telah sesuai dengan konteks klasifikasi yang menuntut keseimbangan antara mengidentifikasi positif yang sebenarnya dan meminimalkan kesalahan prediksi positif. Berdasarkan hasil evaluasi, model ini sudah layak untuk digunakan sebagai solusi dalam problem statement yang diberikan.
+
+
 
 _Catatan:_
 - _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
