@@ -109,7 +109,7 @@ Berikut penjelasan singkat dalam bentuk kalimat untuk setiap atribut pada datase
 - Smoking Status adalah status merokok yang telah diubah ke bentuk numerik. Beberapa data memiliki kategori "Unknown" yang jumlahnya cukup banyak.
 Secara keseluruhan, data sudah cukup bersih namun terdapat beberapa nilai ekstrem yang perlu dianalisis lebih lanjut sebelum digunakan untuk pemodelan.
 
-![Alt Text](Resource/matriks.PNG)
+![Alt Text](Resource/matriks.png)
 
 | Pasangan Fitur                  | Korelasi | Interpretasi                                                                 |
 |--------------------------------|----------|------------------------------------------------------------------------------|
@@ -257,7 +257,7 @@ Dari hasil evaluasi, dapat disimpulkan bahwa:
 - **Random Forest**
 Model ini memiliki performa sangat baik pada data training (hampir sempurna), tetapi precision, recall, dan F1 score-nya nol pada data testing. Artinya, Random Forest mengalami overfitting ekstrem dan gagal mengeneralisasi ke data baru, serupa dengan KNN. Kemungkinan besar, kelas minoritas tidak terdeteksi sama sekali dalam proses prediksi testing.
 
-  ![Alt Text](Resource/visualisasi_metriks.PNG)
+  ![Alt Text](Resource/visualisasi_metriks.png)
   
   Berdasarkan hasil visualisasi confusion matrix, model KNN menghasilkan 0 True Positive (TP), 54 False Negative (FN), 918 True Negative (TN), dan 2 False Positive (FP). Model Decision Tree menunjukkan 10 TP, 44 FN, 887 TN, dan 33 FP. Sementara itu, model Random Forest memiliki 0 TP, 54 FN, 920 TN, dan 0 FP. Nilai-nilai ini mencerminkan bagaimana masing-masing model melakukan klasifikasi terhadap kelas positif dan negatif pada data pengujian.
 
