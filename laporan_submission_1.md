@@ -85,7 +85,7 @@ Dataset Stroke Prediction didapatkan dari Kaggle dataset ini digunakan untuk mem
 
     Menurut tabel data diatas terdapat missing value di kolom `bmi` sebanyak 201 data.
 
- - Duplikat value
+  - Duplikat value
    | Data               | Jumlah Duplicat Value|
    |--------------------|----------------------|
    | data               | 0                    |
