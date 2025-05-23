@@ -220,7 +220,7 @@ Tahapan ini membahas proses membangun model machine learning dengan tiga algorit
     - `from sklearn.ensemble import RandomForestClassifier` Mengimpor kelas RandomForestClassifier dari pustaka scikit-learn
     - `rf = RandomForestClassifier(n_estimators=100, random_state=42)`  Membuat objek model Random Forest dengan parameter:
         - `n_estimators=100` berarti model akan menggunakan 100 pohon keputusan dalam ensemble-nya (semakin banyak, semakin stabil prediksi, tapi lebih lambat).
-        - random_state=42 adalah angka acak tetap untuk reproducibility — agar hasilnya selalu sama setiap kali dijalankan.
+        - `random_state=42` adalah angka acak tetap untuk reproducibility — agar hasilnya selalu sama setiap kali dijalankan.
     - `rf.fit(X_train, y_train)` Melatih (training) model Random Forest menggunakan data latih X_train (fitur) dan y_train (label/target). Model akan mempelajari pola hubungan antara fitur dan target dari data tersebut.
     - `rf_preds = rf.predict(X_test)` Menggunakan model yang telah dilatih untuk memprediksi data uji (X_test), hasil prediksi disimpan dalam variabel rf_preds, yang berisi kelas/label hasil prediksi untuk masing-masing baris dalam X_test.
 
