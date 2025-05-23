@@ -198,11 +198,8 @@ Tahapan ini membahas proses membangun model machine learning dengan tiga algorit
 
  - **Model 2: Decision Tree**
     - `from sklearn.tree import DecisionTreeClassifier`  Mengimpor kelas DecisionTreeClassifier dari scikit-learn. Model ini digunakan untuk klasifikasi berbasis Desicion tree.
-    
-    -`dt = DecisionTreeClassifier(random_state=42)`  Membuat objek model Decision Tree dengan seed acak 42 agar hasil konsisten.
-    
+    - `dt = DecisionTreeClassifier(random_state=42)`  Membuat objek model Decision Tree dengan seed acak 42 agar hasil konsisten.
     - `dt.fit(X_train, y_train)`  Melatih model dengan data latih X_train dan y_train.
-    
     - `dt_preds = dt.predict(X_test)` Menghasilkan prediksi label dari data uji X_test.
 
     - **Cara Kerja Decision Tree:**
