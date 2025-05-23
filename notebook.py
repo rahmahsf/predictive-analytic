@@ -13,6 +13,10 @@ original dataset: https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-
 # Import Library
 """
 
+!pip freeze > requirements.txt
+from google.colab import files
+files.download('requirements.txt')
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -24,7 +28,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
-from IPython.display import display
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 
 """Mengimport semua library yang dibutuhkan
@@ -32,7 +35,7 @@ from sklearn.metrics import classification_report, confusion_matrix, accuracy_sc
 # Load Data
 """
 
-df = pd.read_csv('healthcare-dataset-stroke-data.csv')
+df = pd.read_csv('/content/drive/MyDrive/SPK/DBS/predictive analystic/healthcare-dataset-stroke-data.csv')
 df
 
 """Menampilkan seluruh data, data diawal terdapat 5110 data
@@ -47,12 +50,6 @@ df.info()
 print(f'Jumlah missing value: {df.isnull().sum()}')
 
 """Terdapat missing value di bmi sebanyak 201 data"""
-
-# Drop ID column
-df.drop('id', axis=1, inplace=True)
-df
-
-"""Menghapus ID karena itu tidak ada hubungannya dengan data stroke"""
 
 print(f'Jumlah baris duplikat: {df.duplicated().sum()}')
 
@@ -87,6 +84,12 @@ plt.show()
 
 # Data Preparation
 """
+
+# Drop ID column
+df.drop('id', axis=1, inplace=True)
+df
+
+"""Menghapus ID karena itu tidak ada hubungannya dengan data stroke"""
 
 df = df.dropna()
 print(f'Jumlah missing value setelah dihapus: {df.isnull().sum()}')
@@ -132,7 +135,9 @@ knn.fit(X_train, y_train)
 knn_preds = knn.predict(X_test)
 
 """- `knn = KNeighborsClassifier(n_neighbors=5)` Membuat objek model KNN dengan parameter n_neighbors=5, yang artinya model akan memprediksi label berdasarkan 5 tetangga terdekat.
-- `knn_preds = knn.predict(X_test)` Melakukan prediksi pada data uji X_test menggunakan model KNN yang sudah dilatih.
+- `knn.fit(X_train, y_train)`Melatih model KNN menggunakan data latih X_train (fitur) dan y_train (label/target). Proses pelatihan ini menyimpan data latih karena KNN adalah model berbasis instance (lazy learning), tidak membangun model eksplisit saat training
+- `knn_preds = knn.predict(X_test)` Menggunakan model KNN untuk memprediksi label pada data uji X_test, dengan membandingkan jarak data uji ke data latih dan mengambil mayoritas label dari 5 tetangga terdekat. Hasil prediksi disimpan di variabel knn_preds.
+
 """
 
 # Decision Tree
@@ -141,7 +146,7 @@ dt.fit(X_train, y_train)
 dt_preds = dt.predict(X_test)
 
 """- `from sklearn.tree import DecisionTreeClassifier`  Mengimpor kelas DecisionTreeClassifier dari scikit-learn. Model ini digunakan untuk klasifikasi berbasis Desicion tree.
-- `dt = DecisionTreeClassifier(max_depth=10, random_state=42)`  Membuat objek model Decision Tree dengan kedalaman maksimum pohon 10 dan seed acak 42 agar hasil konsisten.
+- `dt = DecisionTreeClassifier(random_state=42)`  Membuat objek model Decision Tree dengan seed acak 42 agar hasil konsisten.
 - `dt.fit(X_train, y_train)`  Melatih model dengan data latih X_train dan y_train.
 - `dt_preds = dt.predict(X_test)` Menghasilkan prediksi label dari data uji X_test.
 """
@@ -151,14 +156,11 @@ rf = RandomForestClassifier(n_estimators=100, random_state=42)
 rf.fit(X_train, y_train)
 rf_preds = rf.predict(X_test)
 
-"""- `from sklearn.ensemble import RandomForestClassifier` Mengimpor kelas RandomForestClassifier dari pustaka scikit-learn
-- `rf = RandomForestClassifier(n_estimators=50, max_depth=16, random_state=55, n_jobs=-1)`  Membuat objek model Random Forest dengan parameter:
-   - `n_estimators=50`: Jumlah pohon keputusan yang dibuat.
-   - `max_depth=16`: Membatasi kedalaman maksimal setiap pohon.
-   - `random_state=55`: Untuk hasil yang konsisten.
-   - `n_jobs=-1`: Gunakan semua core CPU agar pelatihan lebih cepat.
- - `rf.fit(X_train, y_train)` Melatih model menggunakan data pelatihan.
- - `rf_preds = rf.predict(X_test)` Menghasilkan prediksi pada data uji.
+"""- `rf = RandomForestClassifier(n_estimators=100, random_state=42)`  Membuat objek model Random Forest dengan parameter:
+     - `n_estimators=100` berarti model akan menggunakan 100 pohon keputusan dalam ensemble-nya (semakin banyak, semakin stabil prediksi, tapi lebih lambat).
+     - random_state=42 adalah angka acak tetap untuk reproducibility — agar hasilnya selalu sama setiap kali dijalankan.
+- `rf.fit(X_train, y_train)` Melatih (training) model Random Forest menggunakan data latih X_train (fitur) dan y_train (label/target). Model akan mempelajari pola hubungan antara fitur dan target dari data tersebut.
+- `rf_preds = rf.predict(X_test)` Menggunakan model yang telah dilatih untuk memprediksi data uji (X_test), hasil prediksi disimpan dalam variabel rf_preds, yang berisi kelas/label hasil prediksi untuk masing-masing baris dalam X_test.
 
 # EVALUASI
 """
@@ -214,4 +216,45 @@ for ax, (title, preds) in zip(axes, models):
 plt.tight_layout()
 plt.show()
 
-"""Berdasarkan hasil visualisasi confusion matrix, model KNN menghasilkan 0 True Positive (TP), 54 False Negative (FN), 918 True Negative (TN), dan 2 False Positive (FP). Model Decision Tree menunjukkan 10 TP, 44 FN, 887 TN, dan 33 FP. Sementara itu, model Random Forest memiliki 0 TP, 54 FN, 920 TN, dan 0 FP. Nilai-nilai ini mencerminkan bagaimana masing-masing model melakukan klasifikasi terhadap kelas positif dan negatif pada data pengujian."""
+"""Berdasarkan hasil visualisasi confusion matrix, model KNN menghasilkan 0 True Positive (TP), 54 False Negative (FN), 918 True Negative (TN), dan 2 False Positive (FP). Model Decision Tree menunjukkan 10 TP, 44 FN, 887 TN, dan 33 FP. Sementara itu, model Random Forest memiliki 0 TP, 54 FN, 920 TN, dan 0 FP. Nilai-nilai ini mencerminkan bagaimana masing-masing model melakukan klasifikasi terhadap kelas positif dan negatif pada data pengujian.
+
+#  feature importance
+"""
+
+# Daftar fitur yang digunakan (tanpa 'id' dan 'stroke')
+fitur = ['gender', 'age', 'hypertension', 'heart_disease', 'ever_married',
+         'work_type', 'Residence_type', 'avg_glucose_level', 'bmi', 'smoking_status']
+
+# Menampilkan feature importance Decision Tree
+dt_importance = pd.DataFrame({
+    'Fitur': fitur,
+    'Importance': dt.feature_importances_
+}).sort_values(by='Importance', ascending=False)
+print("Decision Tree Feature Importance:")
+print(dt_importance)
+
+plt.figure(figsize=(8,5))
+plt.barh(dt_importance['Fitur'], dt_importance['Importance'], color='lightgreen')
+plt.gca().invert_yaxis()
+plt.title('Feature Importance - Decision Tree')
+plt.xlabel('Importance')
+plt.show()
+
+"""Kode tersebut menampilkan tingkat pentingnya masing-masing fitur yang digunakan oleh model Decision Tree dalam proses pengambilan keputusan untuk memprediksi risiko stroke. Pertama, dibuat sebuah DataFrame yang berisi daftar fitur (selain kolom 'id' dan 'stroke') dan nilai feature_importances_ yang dihasilkan oleh model Decision Tree setelah pelatihan, yang menunjukkan kontribusi relatif tiap fitur terhadap hasil prediksi. DataFrame ini kemudian diurutkan berdasarkan nilai pentingnya secara menurun agar fitur yang paling berpengaruh berada di atas. Selanjutnya, visualisasi berupa grafik batang horizontal dibuat untuk mempermudah interpretasi, dengan fitur yang paling penting tampil di bagian atas grafik, sehingga memudahkan analisis dalam memahami fitur mana yang paling signifikan dalam menentukan risiko stroke menurut model tersebut. Berdasarkan hasil fitur yang berpengaruh di decision three adalah glukosa, bmi dan umur"""
+
+# Menampilkan feature importance Random Forest
+rf_importance = pd.DataFrame({
+    'Fitur': fitur,
+    'Importance': rf.feature_importances_
+}).sort_values(by='Importance', ascending=False)
+print("Random Forest Feature Importance:")
+print(rf_importance)
+
+plt.figure(figsize=(8,5))
+plt.barh(rf_importance['Fitur'], rf_importance['Importance'], color='skyblue')
+plt.gca().invert_yaxis()
+plt.title('Feature Importance - Random Forest')
+plt.xlabel('Importance')
+plt.show()
+
+"""Kode ini berfungsi untuk menampilkan dan memvisualisasikan tingkat pentingnya masing-masing fitur dalam model Random Forest yang digunakan untuk memprediksi risiko stroke. Pertama, dibuat sebuah DataFrame yang berisi daftar fitur (yang sudah didefinisikan sebelumnya) beserta nilai feature_importances_ dari model Random Forest setelah proses pelatihan, yang menunjukkan seberapa besar kontribusi tiap fitur dalam menentukan hasil prediksi. DataFrame tersebut kemudian diurutkan berdasarkan nilai pentingnya secara menurun agar fitur dengan pengaruh terbesar berada di atas. Selanjutnya, dibuat grafik batang horizontal berwarna biru muda (skyblue) untuk memudahkan pemahaman visual mengenai fitur mana saja yang paling berpengaruh dalam model. Grafik tersebut dibalik sumbunya agar fitur terpenting tampil di bagian atas, membantu analisis lebih cepat terhadap faktor-faktor kunci risiko stroke menurut model Random Forest.  Berdasarkan hasil fitur yang berpengaruh di Random Forest adalah glukosa, bmi dan umur"""
