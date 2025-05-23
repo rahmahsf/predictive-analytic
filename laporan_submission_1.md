@@ -179,7 +179,8 @@ Tahapan ini membahas proses membangun model machine learning dengan tiga algorit
  - **Model 1: K-Nearest Neighbors (KNN)**
    - `from sklearn.neighbors import KNeighborsClassifier` Mengimpor kelas KNeighborsClassifier dari pustaka scikit-learn. KNN adalah algoritma berbasis *instance-based learning*.
    - `knn = KNeighborsClassifier(n_neighbors=5)` Membuat objek model KNN dengan parameter n_neighbors=5, yang artinya model akan memprediksi label berdasarkan 5 tetangga terdekat.
-   - `knn_preds = knn.predict(X_test)` Melakukan prediksi pada data uji X_test menggunakan model KNN yang sudah dilatih.
+   - `knn.fit(X_train, y_train)`Melatih model KNN menggunakan data latih X_train (fitur) dan y_train (label/target). Proses pelatihan ini menyimpan data latih karena KNN adalah model berbasis instance (lazy learning), tidak membangun model eksplisit saat training.
+   - `knn_preds = knn.predict(X_test)` Menggunakan model KNN untuk memprediksi label pada data uji X_test, dengan membandingkan jarak data uji ke data latih dan mengambil mayoritas label dari 5 tetangga terdekat. Hasil prediksi disimpan di variabel knn_preds.
 
    - **Cara Kerja KNN:**
       - KNN bekerja dengan mencari k tetangga terdekat dari data yang akan diprediksi berdasarkan jarak (umumnya Euclidean).
