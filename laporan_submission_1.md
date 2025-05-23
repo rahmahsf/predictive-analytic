@@ -277,12 +277,16 @@ Dari hasil evaluasi, dapat disimpulkan bahwa:
 
 - **Decision Tree**
   Decision Tree memiliki akurasi 100% pada data training, namun hanya 92.09% pada data testing. Meski begitu, model masih memberikan precision sebesar 23.26% dan recall 18.52% di testing, menghasilkan F1 score sebesar 0.2062. Ini lebih baik dibanding KNN, namun performanya masih tergolong rendah dalam mendeteksi kelas positif.
+
   ![Alt Text](Resource/decisiontree.png)
+
   Berdasarkan hasil feature importance dari model Decision Tree, dapat disimpulkan bahwa tiga fitur paling berpengaruh dalam memprediksi risiko stroke adalah tingkat glukosa darah rata-rata (avg_glucose_level), indeks massa tubuh (BMI), dan usia (age). Ketiga fitur ini memiliki nilai kontribusi yang jauh lebih tinggi dibandingkan fitur lainnya, menandakan bahwa model sangat mengandalkan informasi dari ketiganya untuk mengambil keputusan klasifikasi.
   
 - **Random Forest**
 Model ini memiliki performa sangat baik pada data training (hampir sempurna), tetapi precision, recall, dan F1 score-nya nol pada data testing. Artinya, Random Forest mengalami overfitting ekstrem dan gagal mengeneralisasi ke data baru, serupa dengan KNN. Kemungkinan besar, kelas minoritas tidak terdeteksi sama sekali dalam proses prediksi testing.
+
  ![Alt Text](Resource/randomforest.png)
+
 Berdasarkan hasil feature importance dari model Random Forest, dapat disimpulkan bahwa tiga fitur paling berpengaruh dalam memprediksi risiko stroke adalah tingkat glukosa darah rata-rata (avg_glucose_level), indeks massa tubuh (BMI), dan usia (age). Ketiga fitur ini memiliki nilai kontribusi yang jauh lebih tinggi dibandingkan fitur lainnya, menandakan bahwa model sangat mengandalkan informasi dari ketiganya untuk mengambil keputusan klasifikasi.
 
 
