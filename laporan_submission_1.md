@@ -66,33 +66,34 @@ Dataset Stroke Prediction didapatkan dari Kaggle dataset ini digunakan untuk mem
   | 11 | stroke              | 5110 non-null  | int64     |
  
 - **Kondisi data. (missing value, duplikat, dan outlier)**
-  - missing value
+    - missing value
     
-     | Kolom              | Jumlah Missing Value |
-     |--------------------|----------------------|
-     | id                 | 0                    |
-     | gender             | 0                    |
-     | age                | 0                    |
-     | hypertension       | 0                    |
-     | heart_disease      | 0                    |
-     | ever_married       | 0                    |
-     | work_type          | 0                    |
-     | Residence_type     | 0                    |
-     | avg_glucose_level  | 0                    |
-     | bmi                | 201                  |
-     | smoking_status     | 0                    |
-     | stroke             | 0                    |
+       | Kolom              | Jumlah Missing Value |
+       |--------------------|----------------------|
+       | id                 | 0                    |
+       | gender             | 0                    |
+       | age                | 0                    |
+       | hypertension       | 0                    |
+       | heart_disease      | 0                    |
+       | ever_married       | 0                    |
+       | work_type          | 0                    |
+       | Residence_type     | 0                    |
+       | avg_glucose_level  | 0                    |
+       | bmi                | 201                  |
+       | smoking_status     | 0                    |
+       | stroke             | 0                    |
 
-    Menurut tabel data diatas terdapat missing value di kolom `bmi` sebanyak 201 data.
+      Menurut tabel data diatas terdapat missing value di kolom `bmi` sebanyak 201 data.
 
- - Duplikat value
-   | Data               | Jumlah Duplicat Value|
-   |--------------------|----------------------|
-   | data               | 0                    |
+    - Duplikat value
+    
+       | Data               | Jumlah Duplicat Value|
+       |--------------------|----------------------|
+       | data               | 0                    |
 
-   Data yang tersedia telah diperiksa dan tidak ditemukan adanya duplikasi. Hal ini menunjukkan bahwa setiap entri dalam dataset bersifat unik dan tidak berulang.
+       Data yang tersedia telah diperiksa dan tidak ditemukan adanya duplikasi. Hal ini menunjukkan bahwa setiap entri dalam dataset bersifat unik dan tidak berulang.
    
-- Data outlier
+    - Data outlier
 
 | Statistik    | gender | age   | hypertension | heart_disease | ever_married | work_type | Residence_type | avg_glucose_level | bmi    | smoking_status |
 |--------------|--------|-------|--------------|---------------|--------------|-----------|----------------|-------------------|--------|----------------|
@@ -178,7 +179,8 @@ Tahapan ini membahas proses membangun model machine learning dengan tiga algorit
  - **Model 1: K-Nearest Neighbors (KNN)**
    - `from sklearn.neighbors import KNeighborsClassifier` Mengimpor kelas KNeighborsClassifier dari pustaka scikit-learn. KNN adalah algoritma berbasis *instance-based learning*.
    - `knn = KNeighborsClassifier(n_neighbors=5)` Membuat objek model KNN dengan parameter n_neighbors=5, yang artinya model akan memprediksi label berdasarkan 5 tetangga terdekat.
-   - `knn_preds = knn.predict(X_test)` Melakukan prediksi pada data uji X_test menggunakan model KNN yang sudah dilatih.
+   - `knn.fit(X_train, y_train)`Melatih model KNN menggunakan data latih X_train (fitur) dan y_train (label/target). Proses pelatihan ini menyimpan data latih karena KNN adalah model berbasis instance (lazy learning), tidak membangun model eksplisit saat training.
+   - `knn_preds = knn.predict(X_test)` Menggunakan model KNN untuk memprediksi label pada data uji X_test, dengan membandingkan jarak data uji ke data latih dan mengambil mayoritas label dari 5 tetangga terdekat. Hasil prediksi disimpan di variabel knn_preds.
 
    - **Cara Kerja KNN:**
       - KNN bekerja dengan mencari k tetangga terdekat dari data yang akan diprediksi berdasarkan jarak (umumnya Euclidean).
@@ -194,7 +196,7 @@ Tahapan ini membahas proses membangun model machine learning dengan tiga algorit
       - **Sangat sensitif terhadap fitur yang tidak relevan atau memiliki skala berbeda**: Fitur yang memiliki skala lebih besar bisa mendominasi hasil perhitungan jarak jika tidak dilakukan normalisasi atau standarisasi.
       - **Performa buruk pada data berdimensi tinggi (curse of dimensionality)** : Jarak antar titik cenderung menjadi homogen, sehingga efektivitas penentuan tetangga terdekat menurun.
 
- - **Decision Tree**
+ - **Model 2: Decision Tree**
     - `from sklearn.tree import DecisionTreeClassifier`  Mengimpor kelas DecisionTreeClassifier dari scikit-learn. Model ini digunakan untuk klasifikasi berbasis Desicion tree.
     -`dt = DecisionTreeClassifier(random_state=42)`  Membuat objek model Decision Tree dengan seed acak 42 agar hasil konsisten.
     - `dt.fit(X_train, y_train)`  Melatih model dengan data latih X_train dan y_train.
@@ -214,7 +216,7 @@ Tahapan ini membahas proses membangun model machine learning dengan tiga algorit
        - **Rentan terhadap perubahan data kecil**: Perubahan kecil dalam dataset dapat menghasilkan struktur pohon yang sangat berbeda (kurang stabil).
        - **Tidak optimal pada data yang sangat kompleks**: Model cenderung menghasilkan keputusan yang terlalu deterministik dan tidak fleksibel.
 
- - **Random Forest**
+ - **Model 3: Random Forest**
     - `from sklearn.ensemble import RandomForestClassifier` Mengimpor kelas RandomForestClassifier dari pustaka scikit-learn
     - `rf = RandomForestClassifier(n_estimators=100, random_state=42)`  Membuat objek model Random Forest dengan parameter:
         - `n_estimators=100` berarti model akan menggunakan 100 pohon keputusan dalam ensemble-nya (semakin banyak, semakin stabil prediksi, tapi lebih lambat).
