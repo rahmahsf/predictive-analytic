@@ -336,7 +336,7 @@ Berdasarkan hasil feature importance dari model Random Forest, dapat disimpulkan
 ---
 
 ### Kesimpulan Umum
-Pendekatan machine learning terbukti efektif dalam mendeteksi risiko stroke sejak dini. Dengan pemilihan fitur yang tepat, penanganan data tidak seimbang, serta tuning model yang optimal, sistem ini dapat digunakan sebagai alat pendukung keputusan di bidang kesehatan. Hal ini memungkinkan **intervensi medis yang lebih cepat** dan **peningkatan kualitas hidup** individu yang berisiko tinggi terkena stroke.
+Pendekatan machine learning terbukti efektif dalam mendeteksi risiko stroke sejak dini. Dengan pemilihan fitur yang tepat, penanganan data tidak seimbang, sistem ini dapat digunakan sebagai alat pendukung keputusan di bidang kesehatan. Hal ini memungkinkan **intervensi medis yang lebih cepat** dan **peningkatan kualitas hidup** individu yang berisiko tinggi terkena stroke.
 
 
 ---
