@@ -68,22 +68,22 @@ Dataset Stroke Prediction didapatkan dari Kaggle dataset ini digunakan untuk mem
 - **Kondisi data. (missing value, duplikat, dan outlier)**
   - missing value
     
-   | Kolom              | Jumlah Missing Value |
-   |--------------------|----------------------|
-   | id                 | 0                    |
-   | gender             | 0                    |
-   | age                | 0                    |
-   | hypertension       | 0                    |
-   | heart_disease      | 0                    |
-   | ever_married       | 0                    |
-   | work_type          | 0                    |
-   | Residence_type     | 0                    |
-   | avg_glucose_level  | 0                    |
-   | bmi                | 201                  |
-   | smoking_status     | 0                    |
-   | stroke             | 0                    |
+     | Kolom              | Jumlah Missing Value |
+     |--------------------|----------------------|
+     | id                 | 0                    |
+     | gender             | 0                    |
+     | age                | 0                    |
+     | hypertension       | 0                    |
+     | heart_disease      | 0                    |
+     | ever_married       | 0                    |
+     | work_type          | 0                    |
+     | Residence_type     | 0                    |
+     | avg_glucose_level  | 0                    |
+     | bmi                | 201                  |
+     | smoking_status     | 0                    |
+     | stroke             | 0                    |
 
-  Menurut tabel data diatas terdapat missing value di kolom `bmi` sebanyak 201 data.
+    Menurut tabel data diatas terdapat missing value di kolom `bmi` sebanyak 201 data.
 
  - Duplikat value
    | Data               | Jumlah Duplicat Value|
@@ -153,9 +153,10 @@ Data preparation adalah tahap penting sebelum membangun model machine learning. 
    | bmi                | 0                    |
    | smoking_status     | 0                    |
    | stroke             | 0                    |
+
    Hasil pengecekan menunjukkan bahwa seluruh kolom telah bersih dari data yang kosong, termasuk kolom bmi yang sebelumnya memiliki 201 missing value dan telah ditangani. Dengan kondisi data yang sudah lengkap dan konsisten, maka data siap untuk diproses lebih lanjut dalam tahap analisis atau pemodelan machine learning.
 
-- **Menghapus Nilai Tidak Logis (Outlier Ekstrem)**
+- **Menghapus Nilai Tidak Logis (Outlier)**
   Pada kolom age, terdapat data dengan nilai minimum 0.08 tahun, yang jika dikonversi hanya sekitar 29 hari. Ini sangat tidak relevan untuk kasus stroke. Stroke hampir tidak pernah terjadi pada bayi baru lahir, sehingga nilai tersebut tidak logis dan dianggap sebagai outlier ekstrem. Data dengan age < 1 tahun dihapus.
   
 - **Encoding fitur kategori**
