@@ -325,7 +325,7 @@ Berdasarkan hasil feature importance dari model Random Forest, dapat disimpulkan
   - Indeks massa tubuh (bmi)
   - Usia (age)
     
-- Fitur-fitur lain seperti gender, status pernikahan, jenis pekerjaan, dan tipe tempat tinggal juga berperan dalam model, meskipun kontribusinya relatif lebih kecil dibanding fitur utama di atas.
+- Fitur-fitur lain seperti hipertensi, riwayat penyakit jantung, gender, status pernikahan, jenis pekerjaan, status merokok dan tipe tempat tinggal juga berperan dalam model, meskipun kontribusinya relatif lebih kecil dibanding fitur utama di atas.
 
 
 ### 3. Seberapa akurat model klasifikasi yang dikembangkan dalam memprediksi kejadian stroke?
