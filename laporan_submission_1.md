@@ -66,33 +66,34 @@ Dataset Stroke Prediction didapatkan dari Kaggle dataset ini digunakan untuk mem
   | 11 | stroke              | 5110 non-null  | int64     |
  
 - **Kondisi data. (missing value, duplikat, dan outlier)**
-  - missing value
+    - missing value
     
-     | Kolom              | Jumlah Missing Value |
-     |--------------------|----------------------|
-     | id                 | 0                    |
-     | gender             | 0                    |
-     | age                | 0                    |
-     | hypertension       | 0                    |
-     | heart_disease      | 0                    |
-     | ever_married       | 0                    |
-     | work_type          | 0                    |
-     | Residence_type     | 0                    |
-     | avg_glucose_level  | 0                    |
-     | bmi                | 201                  |
-     | smoking_status     | 0                    |
-     | stroke             | 0                    |
+       | Kolom              | Jumlah Missing Value |
+       |--------------------|----------------------|
+       | id                 | 0                    |
+       | gender             | 0                    |
+       | age                | 0                    |
+       | hypertension       | 0                    |
+       | heart_disease      | 0                    |
+       | ever_married       | 0                    |
+       | work_type          | 0                    |
+       | Residence_type     | 0                    |
+       | avg_glucose_level  | 0                    |
+       | bmi                | 201                  |
+       | smoking_status     | 0                    |
+       | stroke             | 0                    |
 
-    Menurut tabel data diatas terdapat missing value di kolom `bmi` sebanyak 201 data.
+      Menurut tabel data diatas terdapat missing value di kolom `bmi` sebanyak 201 data.
 
-  - Duplikat value
-   | Data               | Jumlah Duplicat Value|
-   |--------------------|----------------------|
-   | data               | 0                    |
+    - Duplikat value
+    
+       | Data               | Jumlah Duplicat Value|
+       |--------------------|----------------------|
+       | data               | 0                    |
 
-   Data yang tersedia telah diperiksa dan tidak ditemukan adanya duplikasi. Hal ini menunjukkan bahwa setiap entri dalam dataset bersifat unik dan tidak berulang.
+       Data yang tersedia telah diperiksa dan tidak ditemukan adanya duplikasi. Hal ini menunjukkan bahwa setiap entri dalam dataset bersifat unik dan tidak berulang.
    
-- Data outlier
+    - Data outlier
 
 | Statistik    | gender | age   | hypertension | heart_disease | ever_married | work_type | Residence_type | avg_glucose_level | bmi    | smoking_status |
 |--------------|--------|-------|--------------|---------------|--------------|-----------|----------------|-------------------|--------|----------------|
