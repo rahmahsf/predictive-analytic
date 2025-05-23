@@ -196,7 +196,7 @@ Tahapan ini membahas proses membangun model machine learning dengan tiga algorit
       - **Sangat sensitif terhadap fitur yang tidak relevan atau memiliki skala berbeda**: Fitur yang memiliki skala lebih besar bisa mendominasi hasil perhitungan jarak jika tidak dilakukan normalisasi atau standarisasi.
       - **Performa buruk pada data berdimensi tinggi (curse of dimensionality)** : Jarak antar titik cenderung menjadi homogen, sehingga efektivitas penentuan tetangga terdekat menurun.
 
- - **Decision Tree**
+ - **Model 2: Decision Tree**
     - `from sklearn.tree import DecisionTreeClassifier`  Mengimpor kelas DecisionTreeClassifier dari scikit-learn. Model ini digunakan untuk klasifikasi berbasis Desicion tree.
     -`dt = DecisionTreeClassifier(random_state=42)`  Membuat objek model Decision Tree dengan seed acak 42 agar hasil konsisten.
     - `dt.fit(X_train, y_train)`  Melatih model dengan data latih X_train dan y_train.
@@ -216,7 +216,7 @@ Tahapan ini membahas proses membangun model machine learning dengan tiga algorit
        - **Rentan terhadap perubahan data kecil**: Perubahan kecil dalam dataset dapat menghasilkan struktur pohon yang sangat berbeda (kurang stabil).
        - **Tidak optimal pada data yang sangat kompleks**: Model cenderung menghasilkan keputusan yang terlalu deterministik dan tidak fleksibel.
 
- - **Random Forest**
+ - **Model 3: Random Forest**
     - `from sklearn.ensemble import RandomForestClassifier` Mengimpor kelas RandomForestClassifier dari pustaka scikit-learn
     - `rf = RandomForestClassifier(n_estimators=100, random_state=42)`  Membuat objek model Random Forest dengan parameter:
         - `n_estimators=100` berarti model akan menggunakan 100 pohon keputusan dalam ensemble-nya (semakin banyak, semakin stabil prediksi, tapi lebih lambat).
